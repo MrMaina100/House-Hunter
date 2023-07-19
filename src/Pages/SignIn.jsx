@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import {getAuth,  signInWithEmailAndPassword  } from 'firebase/auth'
+import { toast } from "sonner"
 
 function SignIn() {
 
@@ -34,6 +35,8 @@ function SignIn() {
       }
       
     } catch (error) {
+      toast.error('Not A user')
+
       
     }
 

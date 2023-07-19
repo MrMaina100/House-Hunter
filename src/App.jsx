@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import { Toaster } from "sonner"
 import Header from "./Components/Header"
 import Explore from "./Pages/Explore"
 import Offers from "./Pages/Offers"
@@ -10,11 +11,13 @@ import ForgotPassword from "./Pages/ForgotPassword"
 function App() {
   return (
     <>
+    <Toaster position="top-center" expand={false} richColors/>
+    
     <Router>
       <Routes>
         <Route path="/" element={<Explore/>}/>
         <Route path="/offers" element={<Offers/>}/>
-        <Route path="/profile" element={<SignIn/>}/>
+        <Route path="/profile" element={<Profile/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/signin" element={<SignIn/>}/>
         <Route path="/forgotpassword" element={<ForgotPassword/>}/>
@@ -22,6 +25,7 @@ function App() {
       </Routes>      
         <Header/>
     </Router>
+    
      
     </>
   )

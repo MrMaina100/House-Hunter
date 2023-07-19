@@ -1,8 +1,9 @@
-import { Link, Navigate, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import {db} from '../Firebase.config'
 import { setDoc, doc, serverTimestamp } from "firebase/firestore"
+import { toast } from "sonner"
 function SignUp() {
   const navigate = useNavigate()
   const [showPassword, setShowpassword]= useState(false)
@@ -41,7 +42,7 @@ function SignUp() {
         
         navigate('/')
       } catch (error) {
-        console.log(error);
+        toast.error('oops something went wrong,check email or password')
         
       }
     }
