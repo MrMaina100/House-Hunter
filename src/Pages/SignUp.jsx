@@ -2,7 +2,9 @@ import { Link, Navigate, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import {db} from '../Firebase.config'
+import { setDoc, doc, serverTimestamp } from "firebase/firestore"
 function SignUp() {
+  const navigate = useNavigate()
   const [showPassword, setShowpassword]= useState(false)
   const [formData, setFormData] = useState({
     name:'',
@@ -30,8 +32,14 @@ function SignUp() {
         updateProfile(auth.currentUser,{
           displayname:name
         })
+
+        //save user to firestore
+        const formDataCopy = {...formData}
+        delete formDataCopy.password
+        formDataCopy.timestamp = serverTimestamp()
+        await setDoc(doc(db, 'users', user.uid), formDataCopy)
         
-        Navigate('/')
+        navigate('/')
       } catch (error) {
         console.log(error);
         
